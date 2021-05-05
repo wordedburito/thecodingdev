@@ -127,6 +127,7 @@
             <div class="form-group"><input class="form-control" type="tel" name="telephone" placeholder="Telephone" required=""></div>
             <div class="form-group"><textarea class="form-control" name="message" placeholder="Message" rows="14" required=""></textarea></div>
 	    <div class="g-recaptcha" data-sitekey="6LfoCGgaAAAAALdnU7X1wgQCnC2t7n5w7L5TQ_PL"></div>
+            <p style="color: red;" id="error-message">Please fill the captcha above!</p>
             <div class="form-group"><button class="btn btn-primary" type="submit">send </button></div>
         </form>
     </div>
@@ -148,8 +149,13 @@
     <script src="https://cdn.jsdelivr.net/gh/thecodingdev/cdn/thecodingdev/assets/js/portfolio.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/thecodingdev/cdn/thecodingdev/assets/js/cookieconsent.min.js" defer></script>
     <script>
+      function isCaptchaChecked() {
+	return grecaptcha && grecaptcha.getResponse().length !== 0;
+      }
+			    
       function onSubmit(token) {
-        document.getElementById("thecodingdev-form").submit();
+        if (!isCaptchaChecked()) {
+	  $("#error-message").removeAttr("hidden");
       }
     </script>
 </body>
